@@ -1,0 +1,60 @@
+From 8a26eb8322bcf602a6cd28cdc1d54ee638182e07 Mon Sep 17 00:00:00 2001
+From: Jari Aalto <jari.aalto@cante.net>
+Date: Wed, 20 Aug 2008 14:41:41 +0300
+Subject: [PATCH] Makefile: add install target
+
+Signed-off-by: Jari Aalto <jari.aalto@cante.net>
+---
+ Makefile |   39 +++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 39 insertions(+), 0 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index d81c162..0292935 100644
+--- a/Makefile
++++ b/Makefile
+@@ -69,3 +69,42 @@ install:
+ 	cp $(PNGCRUSH)$(E) $(DESTDIR)/usr/bin/
+ 	chmod 0755 $(DESTDIR)/usr/bin/$(PNGCRUSH)$(E)
+
++
++
++DESTDIR		=
++prefix		= /usr
++exec_prefix	= $(prefix)
++man_prefix	= $(prefix)/share
++
++PACKAGE		= pngcrush
++INSTALL		= /usr/bin/install
++INSTALL_BIN	= $(INSTALL) -m 755
++INSTALL_SUID	= $(INSTALL) -m 4755
++INSTALL_DATA	= $(INSTALL) -m 644
++
++INSTALL_OBJS_BIN   = $(PACKAGE)
++INSTALL_OBJS_MAN1  = *.1 *.1x
++INSTALL_OBJS_SHARE =
++
++MANDIR1		= $(DESTDIR)$(man_prefix)/man/man1
++MANDIR5		= $(DESTDIR)$(man_prefix)/man/man5
++MANDIR8		= $(DESTDIR)$(man_prefix)/man/man8
++BINDIR		= $(DESTDIR)$(exec_prefix)/bin
++SBINDIR		= $(DESTDIR)$(exec_prefix)/sbin
++ETCDIR		= $(DESTDIR)/etc/$(PACKAGE)
++SHAREDIR	= $(DESTDIR)$(prefix)/share/$(PACKAGE)
++LIBDIR		= $(DESTDIR)$(prefix)/lib/$(PACKAGE)
++
++
++install-bin:
++	# install-bin
++	$(INSTALL_BIN) -d $(BINDIR)
++	$(INSTALL_BIN) -s $(INSTALL_OBJS_BIN) $(BINDIR)
++
++install-man:
++	# install-man
++	$(INSTALL_BIN) -d $(MANDIR1)
++	$(INSTALL_DATA) $(INSTALL_OBJS_MAN1) $(MANDIR1)
++
++install: all install-bin
++
+--
+1.5.6.4
+

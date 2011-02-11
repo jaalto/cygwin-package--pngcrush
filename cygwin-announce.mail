@@ -1,0 +1,59 @@
+To: cygwin-announce@cygwin.com
+Subject: Updated: package N.N
+Subject: New package: pngcrush 1.6.7-1 -- Optimize PNG image files
+
+PACKAGE DESCRIPTION
+===================
+
+Homepage: http://pmt.sourceforge.net/pngcrush
+License : GPL
+
+An optimizer for PNG (Portable Network Graphics) files. Its main
+purpose is to reduce the size of the PNG IDAT data stream by trying
+various compression levels and PNG filter methods. It also can be used
+to remove unwanted ancillary chunks, or to add certain chunks
+including gAMA, tRNS, and textual chunks.
+
+CHANGES SINCE LAST RELEASE
+==========================
+
+/usr/share/doc/pngcrush-*/ChangeLog.txt
+http://pmt.sourceforge.net/pngcrush/ => ChangeLog
+
+INSTALL OR UPGRADE NOTES
+========================
+
+Standard install
+
+CYGWIN INSTALLATION INFORMATION
+===============================
+
+To install this package, click on the "Install Cygwin now" link on the
+<http://cygwin.com/> web page. This downloads setup.exe to your
+system. Then, run setup and answer all of the questions. You'll find
+the package listed in the "All" category. After installation, read the
+documentation at directories:
+
+    /usr/share/doc/<package-version>/*
+    /usr/share/doc/Cygwin/<package-version>.README
+
+If you have questions or comments, please send them to the Cygwin
+mailing list at <cygwin@cygwin.com>.
+
+CYGWIN-ANNOUNCE UNSUBSCRIBE INFO
+================================
+
+This message has been sent to cygwin-announce list.
+
+If you want to unsubscribe from the mailing list, look at the
+"List-Unsubscribe: " tag in the email header of this message. Send
+email to the address specified there. It will be in the format:
+
+    cygwin-announce-unsubscribe-you=yourdomain.com@cygwin.com
+
+More information on unsubscribing can be found:
+
+    http://sources.redhat.com/lists.html#unsubscribe-simple
+
+Please read *all* of the information on unsubscribing that is available
+starting at the above URL.

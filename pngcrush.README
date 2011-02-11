@@ -1,0 +1,116 @@
+pngcrush
+------------------------------------------
+
+Optimize PNG image files
+
+An optimizer for PNG (Portable Network Graphics) files. Its main
+purpose is to reduce the size of the PNG IDAT data stream by trying
+various compression levels and PNG filter methods. It also can be used
+to remove unwanted ancillary chunks, or to add certain chunks
+including gAMA, tRNS, and textual chunks.
+
+Runtime requirements:
+  cygwin
+  libpng12
+  zlib
+
+Build requirements:
+  cygwin
+  libpng12-devel
+  zlib
+
+Canonical homepage:
+  http://pmt.sourceforge.net/pngcrush
+  http://packages.debian.org/pngcrush
+
+Canonical download:
+  http://sourceforge.net/projects/pmt
+
+Version control repository:
+
+Mailing list:
+
+Forum / Wiki:
+
+IRC channel:
+
+Upstream contact:
+  Author: Glenn Randers-Pehrson <glennrp@users.sf.net>
+  Bugs: http://sourceforge.net/tracker/?atid=101689&group_id=1689&func=browse
+
+License:
+  Custom
+
+  pngcrush.c:
+  * COPYRIGHT NOTICE, DISCLAIMER, AND LICENSE:
+  *
+  * If you have modified this source, you may insert additional notices
+  * immediately after this sentence.
+  *
+  * Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson (glennrp@users.sf.net)
+  * Copyright (C) 2005      Greg Roelofs
+  *
+  * The pngcrush computer program is supplied "AS IS".  The Author disclaims all
+  * warranties, expressed or implied, including, without limitation, the
+  * warranties of merchantability and of fitness for any purpose.  The
+  * Author assumes no liability for direct, indirect, incidental, special,
+  * exemplary, or consequential damages, which may result from the use of
+  * the computer program, even if advised of the possibility of such damage.
+  * There is no warranty against interference with your enjoyment of the
+  * computer program or against infringement.  There is no warranty that my
+  * efforts or the computer program will fulfill any of your particular purposes
+  * or needs.  This computer program is provided with all faults, and the entire
+  * risk of satisfactory quality, performance, accuracy, and effort is with
+  * the user.
+  *
+  * Permission is hereby irrevocably granted to everyone to use, copy, modify,
+  * and distribute this source code, or portions hereof, or executable programs
+  * compiled from it, for any purpose, without payment of any fee, subject to
+  * the following restrictions:
+  *
+  * 1. The origin of this source code must not be misrepresented.
+  *
+  * 2. Altered versions must be plainly marked as such and must not be
+  *    misrepresented as being the original source.
+  *
+  * 3. This Copyright notice, disclaimer, and license may not be removed
+  *    or altered from any source or altered source distribution.
+
+Language:
+  C
+
+------------------------------------
+
+Build instructions:
+  unpack pngcrush-1.6.4-1-src.tar.bz2
+    if you use setup to install this src package, it will be
+    unpacked under /usr/src automatically
+  cd /usr/src
+  ./pngcrush*.sh all
+
+This will create:
+  pngcrush-1.6.4-1.tar.bz2
+  pngcrush-1.6.4-1-src.tar.bz2
+
+-------------------------------------------
+
+Files included in the binary distribution:
+
+usr/bin/pngcrush.exe
+usr/share/doc/Cygwin/pngcrush-1.6.4.README
+usr/share/doc/pngcrush-1.6.4/ChangeLog.txt
+
+------------------
+
+Port Notes:
+
+----- version 1.6.7-1 -----
+- New upstream release 2008-08-20
+- Debian patches included
+
+----- version 1.6.4-1 -----
+- Initial release 2007-12-02 Jari Aalto
+- No manual page. Copien one from Debian
+
+Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
+Copyright (C) 2007 Jari Aalto; Licenced under GPL v2 or later

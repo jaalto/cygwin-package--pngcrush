@@ -1,0 +1,199 @@
+.TH "pngcrush" "1"
+.SH "NAME"
+pngcrush \(em optimizes (or modifies) PNG (Portable Network Graphics) files.
+.SH "SYNOPSIS"
+.PP
+\fBpngcrush\fR [\fB\fIoptions\fR\fP]  [infile.png]  [outfile.png]
+.PP
+\fBpngcrush \-e \fIext\fR\fR [\fB\fIoptions\fR\fP]  [file1.png]  [file2.png] \fB...\fR
+.PP
+\fBpngcrush \-d \fIdir\fR\fR [\fB\fIoptions\fR\fP]  [file1.png]  [file2.png] \fB...\fR
+.SH "DESCRIPTION"
+.PP
+\fBpngcrush\fR is an optimizer for PNG (Portable Network Graphics) files.  Its
+main purpose is to reduce the size of the file's IDAT chunk (or stream).  \fBpngcrush\fR can also be used to modify a PNG's ancillary chunks (example: transparency information or textual comments). Some familiarity with the PNG (pronounced 'ping') format may be helpful to users of \fBpngcrush\fR. \fBpngcrush\fR has reasonable defaults so running with no options may produce smaller files.  This document briefly describes the PNG format where necessary to understand \fBpngcrush\fR.  For complete documentation, see :
+.IP "" 10
+http://www.libpng.org/pub/png/.
+.PP
+The actual pixel data of a PNG is contained in one or many IDAT chunks. To make an IDAT chunk PNG encoders take the raw pixel data, filter it with one of 5 different filters (See Section \fI"Filter Types"\fR ) then compress it.  \fBpngcrush\fR reduces the size of PNG files by choosing a different filter or compression methods from those used in the input file.  \fBpngcrush\fR tries multiple filter/compression methods and compares the size of the resulting IDAT chunk.  The filter/compression method with the smallest IDAT chunk is chosen for the output file.  The filter and compression levels \fBpngcrush\fR tries are controlled by command line options.  All of the filter methods and compression levels are lossless; they will not reduce image quality.
+.PP
+In addition to reducing the size of a PNG file, \fBpngcrush\fR can modify ancillary chunks.   Ancillary chunks are optional information including transparency (tRNS), gamma (gAMMA), standard RGB color space conformance (sRGB) or textual information (iTXt, tEXt or zTXt).  See the associated command line options for details on manipulating these chunks.
+.SH "OPTIONS"
+.IP "\fB-already \fIsize\fR\fP         " 10
+If file has an IDAT chunk greater than the integer \fIsize\fR, it will be considered to be already crushed and will not be processed further.
+.IP "\fB-bit_depth \fIn\fR\fP" 10
+Force output bit depth to \fIn\fR. See Section \fI"Color Types"\fR for bit depth restrictions.
+.IP "\fB-bkgd \fIr\fR \fIg\fR \fIb\fR\fP" 10
+Specify the default background color for the image.  Some PNG viewers will use this background when displaying the image. Background is specified by \fIr\fR, \fIg\fR and \fIb\fR integers between 0 and (2
+bitdepth)\-1. For output color type 0 and 4 (gray, see section \fI"Color Types"\fR ) the green index is used as the gray level of the background.
+.IP "\fB-brute\fP" 10
+Use brute force, try 114 different filter/compression methods [11-124]. This option is very time-consuming and generally not worthwhile. You can restrict this option to certain filter types, compression levels, or strategies by following it with \fB-f \fIfilter\fR\fP,  \fB-l \fIlevel\fR\fP, or \fB-z \fIstrategy\fR\fP. For example:
+.RS
+.IP "" 10
+\fBpngcrush\fR \-brute \-f 0 infile.png
+.RE
+.IP "" 10
+Will try only methods that use filter type 0.
+.IP "\fB-c type\fP" 10
+Set the output image color type to \fItype\fR, one of [0, 2, 4, or 6] (see section \fI"Color Types"\fR ).  Future versions of \fBpngcrush\fR will also allow color type 3, if there are 256 or fewer colors present in the input file.  Color types 4 and 6 are padded with an opaque alpha channel if the input file does not have alpha information. You can use 0 or 4 to convert color to grayscale. Use 0 or 2 to delete an unwanted alpha channel. Default is to use same color type as the input file.
+.IP "\fB-cc\fP" 10
+Color counting.  This option allows \fBpngcrush\fR to perform further optimizations on the image based on the number of colors and the format of the input image.  With this option \fBpngcrush\fR will remove an alpha channel from an opaque image and/or will reduce a true color image that is completely gray to grayscale representation. (This option is currently disabled.)
+.IP "\fB-d \fIdir\fR\fP" 10
+Specify a directory for all output files. All output files will have the same name as their respective input files.
+.IP "\fB-dou\fP" 10
+Double the images gamma.  This is used for fixing gamma in PhotoShop 5.0c5.02 files. It has been claimed that the PS5 bug is actually more complex than that, in some unspecified way.
+.IP "\fB-e \fIext\fR\fP" 10
+Specify a new extension \fIext\fR for all output files.
+.IP "\fB-exit\fP" 10
+Forces \fBpngcrush\fR to call exit() rather than return() when it is finished. It is unclear to this writer why this option exists.
+.IP "\fB-f \fIfilter\fR\fP" 10
+Specify \fIfilter\fR (see section \fI"Filter Types"\fR ) to use with the method specified in the preceding \fB-m\fP or \fB-brute\fP option.  Valid filter types are [0-4] : use specified filter, [5]: use adaptive filtering.
+.IP "\fB-fix\fP" 10
+Fix otherwise fatal conditions such as bad CRCs. The CRC (Cyclic Redundancy Check) is present in every chunk and can alert the decoder of corrupt data.
+.IP "\fB-force\fP" 10
+Write a new output file even if larger than input. Otherwise the input file will be copied to output if it is smaller than any generated file and no chunk additions, removals, or changes were requested.
+.IP "\fB-g \fIgamma\fR\fP" 10
+Value to insert in gAMA chunk, only if the input file has no gAMA chunk.  To replace an existing gAMA chunk, use the \fB-replace_gamma\fP option.  Some decoders will use the gAMA chunk to more accurately display the image. \fIgamma\fR relates the output intensity to the input samples (input_sample = light_ou
+GAMMA).  \fIgamma\fR can be any integer between 0 and 2
+32 and is interpreted as GAMMA*100000. For example, if you wanted a GAMMA of 1/2.2, you would enter 45455 for \fIgamma\fR.
+.IP "\fB-h\fP" 10
+Display help and legal notices.
+.IP "\fB-itxt b|a \fIkeyword\fR \fItext\fR\fP" 10
+Insert an (uncompressed) iTXt chunk. \fBb|a\fP indicates whether chunk should be inserted \fIb\fPefore or \fIa\fPfter the IDAT chunk, (see Section \fI"Text Chunks"\fR ).
+.IP "\fB-l \fIlevel\fR\fP" 10
+zlib compression \fIlevel\fR to use on the filtered IDAT chunk with the method specified by the preceding \fB-m\fP or \fB-brute\fP option. zlib compression levels are integers between 0 and 9.  0 = no compression, 1 = fastest compression, and 9 = best compression.
+.IP "\fB-m \fImethod\fR\fP" 10
+\fBpngcrush\fR \fImethod\fR [0-200] to try (0 means try all of 1-10). Can be repeated as in \fB-m 1 \-m 4 \-m 7\fP. This can be useful if you run out of memory when \fBpngcrush\fR tries methods 2, 3, 5, 6, 8, 9, or 10 which use filtering and are memory intensive.  Method 1, 4, and 7 use no filtering; methods 11 and up use specified filter, compression level, and strategy.
+.IP "\fB-max \fImaximum_IDAT_size\fR\fP" 10
+Set the maximum idat size to be used when creating the compression buffer.[1 through 524288]
+.IP "\fB-n\fP" 10
+Do not do compression or write output file. This is useful in conjunction with the \fB-v\fP option to get info, or to test decode speed.
+.IP "\fB-no_cc\fP" 10
+No color counting, see the \fB-cc\fP option.
+.IP "\fB-p\fP" 10
+This option tells \fBpngcrush\fR to pause and wait for [enter] key whenever the screen fills.
+
+.IP "\fB-plte_len \fIn\fR\fP" 10
+Truncates the PLTE. The PLTE chunk contains from 1 to 256 palette entries. Be sure not to truncate it to less than the greatest index present in IDAT.
+.IP "\fB-q\fP" 10
+quiet, the opposite of verbose.
+.IP "\fB-rem \fIchunkname\fR\fP" 10
+Name of an ancillary chunk or optional PLTE to be removed. Be careful with
+this.  Please don't use this feature to remove transparency, gamma, copyright,
+or other valuable information.  To remove several different chunks, repeat:
+\fB-rem tEXt \-rem pHYs\fP.  Known chunks (those in the PNG spec or extensions document) can be named with all lower-case letters, so \fB-rem bkgd\fP is
+equivalent to \fB-rem bKGD\fP.  But note: \fB-rem text\fP removes all forms of tex
+chunks; Exact case is required to remove unknown chunks.  To do surgery with a
+chain-saw, \fB-rem alla\fP removes all known ancillary chunks except for tRNS, and
+\fB-rem allb\fP removes all but tRNS and gAMA.
+.IP "\fB-replace_gamma \fIgamma\fR\fP" 10
+Force a specified \fIgamma\fR in the output file even if gAMA is present in the input. See the \fB-g\fP for more information.
+.IP "\fB-res \fIdpi\fR\fP" 10
+Write a pHYs chunk with a resolution of \fIdpi\fR.  The pHYs chunk indicates the desired pixel size.
+.IP "\fB-save\fP" 10
+Force writing of unknown chunks.  If the input image has chunks that are not part of the PNG specification, they should not be discarded.
+.IP "\fB-srgb \fIn\fR\fP" 10
+Set value of rendering intent for sRGB chunk to \fIn\fR where \fIn\fR is between 0 and 3. The appropriate rendering intent depends on how the image will be used:
+.RS
+.IP "" 10
+0 \- Perceptual: when good adaptation to the output device gamut at the expense of colorimetric accuracy is desired, example: photographs.
+.IP "" 10
+1 \- Relative colorimetric: images requiring color appearance matching (relative to the output device white point), example: logos.
+.IP "" 10
+2: Saturation: preservation of saturation at the expense of hue and lightness is preferred, example: charts and graphs.
+.IP "" 10
+3: Absolute colorimetric: images requiring preservation of absolute colorimetry, example: proofs (previews of images destined for a different output device).
+.RE
+.IP "\fB-text [b|a] \fIkeyword\fR \fItext\fR\fP" 10
+Insert a tEXt chunk. \fB[b|a]\fP indicates whether chunk should be inserted \fIb\fPefore or \fIa\fPfter the IDAT chunk, (see Section \fI"Text Chunks"\fR ).
+.IP "\fB-trns \fIindex\fR \fIred\fR \fIgreen\fR \fIblue\fR \fIgray\fR\fP" 10
+Insert a tRNS (transparency) chunk, if no tRNS chunk found in file.  You must give all five parameters regardless of the color type, scaled to the output bit depth. See the PNG documentation for details.
+.IP "\fB-trns_array \fIn\fR \fItrns[0]\fR \fItrns[1]\fR \fB...\fR \fItrns[n-1]\fR \fP" 10
+Insert a tRNS (transparency) chunk, if no tRNS chunk found in file. See the PNG documentation for details.
+.IP "\fB-v\fP" 10
+Display more detailed information. Repeat the option (use "\-v \-v") for even more.
+.IP "\fB-w \fIsize\fR\fP" 10
+Specify \fIsize\fR in kbytes (or bytes in the case of 512) of the sliding
+compression window where size is one of [32, 16, 8, 4, 2, 1, or 512]. It's best to
+use the default (32) unless you run out of memory.  The program will use a
+smaller window anyway when the uncompressed file is smaller than 16k.
+.IP "\fB-z \fIstrategy\fR\fP" 10
+Specify the zlib compression \fIstrategy\fR [0, 1, or 2] to be used on the filtered IDAT chunk for the method of the preceding \fB-m\fP.  The zlib strategy parameter tunes the compression algorithm and is one of:
+.RS
+.IP "   \(bu" 6
+0 : default, most compression is aimed towards string matching
+.IP "   \(bu" 6
+1 : some string matching, some Huffman coding
+.IP "   \(bu" 6
+2 : use only Huffman coding
+.RE
+.IP "\fB-zitxt [b|a] \fIkeyword\fR \fItext\fR\fP" 10
+Insert a zTXt chunk. \fB[b|a]\fP indicates whether chunk should be inserted \fIb\fPefore or \fIa\fPfter the IDAT chunk, (see Section \fI"Text Chunks"\fR ).
+.IP "\fB-ztxt [b|a] \fIkeyword\fR \fItext\fR\fP" 10
+zTXt chunk to insert (see \-text).
+.SH "Color Types"
+.PP
+The PNG specification provides for five color types.  The color type determines how the IDAT chunk will be interpreted by the decoder.  Choosing a color type appropriate for the color information in an image can reduce the size (See the \fB-cc\fP option). Following are the PNG color types followed by their supported bit depths (Note \fBpngcrush\fR does not support changing a file to color type 3 from another color type.):
+.IP "   \(bu" 6
+0 : grayscale without alpha channel (1,2,4,8,16)
+.IP "   \(bu" 6
+2 : true color without alpha channel (8,16)
+.IP "   \(bu" 6
+3 : indexed color (1,2,4,8)
+.IP "   \(bu" 6
+4 : grayscale with alpha channel (8,16)
+.IP "   \(bu" 6
+6 : true color with alpha channel (8,16)
+.PP
+An alpha channel represents transparency on a per pixel basis. An alpha value of zero is completely transparent. An alpha channel of 2
+bitdepth-1 is completely opaque.
+
+.SH "Filter Types"
+.PP
+The IDAT chunk can optionally be filtered before compression.  These filters can make the IDAT chunk more compressible without losing any data and result in a smaller PNG file.  These filters are applied to the bytes of the IDAT chunk, not the pixels. Following is a brief description of the filters, see the PNG specification for details:
+.IP "   \(bu" 6
+0 : no filter
+.IP "   \(bu" 6
+1 : 'sub' transmits the difference between each byte and the value of the corresponding byte of the prior pixel.
+.IP "   \(bu" 6
+2 : 'up' transmits the difference between each byte and the value of the corresponding byte of the pixel above this pixel
+.IP "   \(bu" 6
+3 : 'average' transmits the difference between each byte and the average of the bytes described in filters 1 and 2
+.IP "   \(bu" 6
+4 : 'paeth' computes a simple linear function of the corresponding byte in three neighboring pixels (paeth_predictor = left + above \- upper left), then transmits the difference between the byte in question and the neighboring byte closest to the value of paeth_predictor.
+.SH "Text Chunks"
+.PP
+Textual information pertaining to an image can be conveyed with the tEXt, iTXt and zTXt chunks. All text chunks consist of a keyword followed by a string.  The following keywords are defined in the PNG specification: (you may invent keywords for other purposes):
+.IP "" 10
+\fITitle\fP: Short title or caption for image
+.IP "" 10
+\fIAuthor\fP: Name of image's creator
+.IP "" 10
+\fIDescription\fP: Longer description of image
+.IP "" 10
+\fICopyright\fP: Copyright notice
+.IP "" 10
+\fICreation Time\fP: Time of original image creation
+.IP "" 10
+\fISoftware\fP: Software used to create the image
+.IP "" 10
+\fIDisclaimer\fP: Legal disclaimer
+.IP "" 10
+\fIWarning\fP: Warning of nature of conten
+.IP "" 10
+\fISource\fP: Device used to create the image
+.IP "" 10
+\fIComment\fP: Miscellaneous comment.
+.PP
+A tEXt chunk stores text in the ISO/IEC 8859-1 (Latin-1) character set.  zTXt chunks also use the Latin-1 character set, but the text is compressed.  This can be useful for large text chunks.  iTXt chunks consist of text in the UTF-8 of the Unicode character set.
+.PP
+\fIkeyword\fR must be at least 1 character and less than 80 characters.  \fItext\fR must be less than 2048  characters when using \fBpngcrush\fR  For  now,  you can only add ten tEXt, iTXt, or zTXt chunks per \fBpngcrush\fR run.
+.SH "SEE ALSO"
+.PP
+png(5), libpng(3), zlib(3).
+.SH "AUTHOR"
+.PP
+This manual page was written by David Whedon dwhedon@gordian.com.
+Much of the
+information was gleaned from "PNG (Portable Network Graphics) Specification, Version 1.2"
+.\" created by instant / docbook-to-man, Tue 25 Sep 2007, 03:19
