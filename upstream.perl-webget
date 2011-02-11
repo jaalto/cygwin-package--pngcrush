@@ -1,2 +1,2 @@
 tag1: pngcrush
-  http://packages.debian.org/unstable/pngcrush pregexp:orig.tar.gz file:pngcrush_1.6.4.orig.tar.gz new: x:
+  http://packages.debian.org/unstable/pngcrush pregexp:orig.tar.bz2 file:pngcrush_1.6.4.orig.tar.bz2 new: x:
