@@ -11,13 +11,9 @@ including gAMA, tRNS, and textual chunks.
 
 Runtime requirements:
   cygwin
-  libpng12
-  zlib
 
 Build requirements:
   cygwin
-  libpng12-devel
-  zlib
 
 Canonical homepage:
   http://pmt.sourceforge.net/pngcrush
@@ -27,6 +23,8 @@ Canonical download:
   http://sourceforge.net/projects/pmt
 
 Version control repository:
+   git clone git://pmt.git.sourceforge.net/gitroot/pmt/pmt
+   git checkout pngcrush
 
 Mailing list:
 
@@ -48,7 +46,7 @@ License:
   * immediately after this sentence.
   *
   * Copyright (C) 1998-2002,2006 Glenn Randers-Pehrson (glennrp@users.sf.net)
-  * Copyright (C) 2005      Greg Roelofs
+  * Copyright (C) 2005-2012      Greg Roelofs
   *
   * The pngcrush computer program is supplied "AS IS".  The Author disclaims all
   * warranties, expressed or implied, including, without limitation, the
@@ -82,27 +80,27 @@ Language:
 ------------------------------------
 
 Build instructions:
-  unpack pngcrush-1.6.4-1-src.tar.bz2
+  unpack pngcrush-1.7.24.20120129+git33373b7-1-src.tar.bz2
     if you use setup to install this src package, it will be
     unpacked under /usr/src automatically
   cd /usr/src
   ./pngcrush*.sh all
 
 This will create:
-  pngcrush-1.6.4-1.tar.bz2
-  pngcrush-1.6.4-1-src.tar.bz2
+  pngcrush-1.7.24.20120129+git33373b7-1.tar.bz2
+  pngcrush-1.7.24.20120129+git33373b7-1-src.tar.bz2
 
 -------------------------------------------
 
 Files included in the binary distribution:
-
-usr/bin/pngcrush.exe
-usr/share/doc/Cygwin/pngcrush-1.6.4.README
-usr/share/doc/pngcrush-1.6.4/ChangeLog.txt
+  See Cygwin package archive
 
 ------------------
 
 Port Notes:
+
+----- version 1.7.24.20120129+git33373b7-1 -----
+- New upstream release 2012-01-29 Jari Aalto
 
 ----- version 1.6.7-1 -----
 - New upstream release 2008-08-20
