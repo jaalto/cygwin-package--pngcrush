@@ -10,7 +10,13 @@ to remove unwanted ancillary chunks, or to add certain chunks
 including gAMA, tRNS, and textual chunks.
 
 Runtime requirements:
+  libpng14
+  zlib
+
+Build requirements:
   cygwin
+  libpng14-devel
+  zlib-devel
 
 Build requirements:
   cygwin
