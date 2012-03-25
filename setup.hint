@@ -5,4 +5,4 @@ various compression levels and PNG filter methods. It also can be used
 to remove unwanted ancillary chunks, or to add certain chunks
 including gAMA, tRNS, and textual chunks."
 category: Graphics
-
+requires: libpng14 zlib
