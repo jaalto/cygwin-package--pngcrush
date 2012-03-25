@@ -9,12 +9,18 @@ various compression levels and PNG filter methods. It also can be used
 to remove unwanted ancillary chunks, or to add certain chunks
 including gAMA, tRNS, and textual chunks.
 
+
 Runtime requirements:
+  None.
+
+  New versions come libs included. Older versions required:
   libpng14
   zlib
 
 Build requirements:
-  cygwin
+  None.
+
+  New versions come libs included. Older versions required:
   libpng14-devel
   zlib-devel
 
@@ -86,15 +92,15 @@ Language:
 ------------------------------------
 
 Build instructions:
-  unpack pngcrush-1.7.24.20120129+git33373b7-1-src.tar.bz2
+  unpack pngcrush-1.7.26+20120223+gitb6d8931-1-src.tar.bz2
     if you use setup to install this src package, it will be
     unpacked under /usr/src automatically
   cd /usr/src
   ./pngcrush*.sh all
 
 This will create:
-  pngcrush-1.7.24.20120129+git33373b7-1.tar.bz2
-  pngcrush-1.7.24.20120129+git33373b7-1-src.tar.bz2
+  pngcrush-1.7.26+20120223+gitb6d8931-1.tar.bz2
+  pngcrush-1.7.26+20120223+gitb6d8931-1-src.tar.bz2
 
 -------------------------------------------
 
@@ -104,6 +110,9 @@ Files included in the binary distribution:
 ------------------
 
 Port Notes:
+
+----- version 1.7.26+20120223+gitb6d8931-1 -----
+- New upstream release 2012-03-25 Jari Aalto
 
 ----- version 1.7.24.20120129+git33373b7-1 -----
 - New upstream release 2012-01-29 Jari Aalto
@@ -117,4 +126,4 @@ Port Notes:
 - No manual page. Copien one from Debian
 
 Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
-Copyright (C) 2007 Jari Aalto; Licenced under GPL v2 or later
+Copyright (C) 2007-2012 Jari Aalto; Licenced under GPL v2 or later
