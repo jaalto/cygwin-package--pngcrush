@@ -1,5 +1,5 @@
 To: cygwin-announce@cygwin.com
-Subject: Updated: pngcrush 1.7.26+20120223+gitb6d8931-1 -- Optimize PNG image files
+Subject: Updated: pngcrush 1.7.26+20130305+gitb6d8931-1 -- Optimize PNG image files
 --text follows this line--
 
 PACKAGE DESCRIPTION
@@ -17,13 +17,13 @@ including gAMA, tRNS, and textual chunks.
 CHANGES SINCE LAST RELEASE
 ==========================
 
-/usr/share/doc/pngcrush-*/ChangeLog.*
+/usr/share/doc/pngcrush/ChangeLog.html
 http://pmt.sourceforge.net/pngcrush/ => ChangeLog
 
 INSTALL OR UPGRADE NOTES
 ========================
 
-Standard install
+Standard install.
 
 CYGWIN INSTALLATION INFORMATION
 ===============================
