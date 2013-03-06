@@ -6,7 +6,7 @@ PACKAGE DESCRIPTION
 ===================
 
 Homepage: http://pmt.sourceforge.net/pngcrush
-License : GPL
+License : Custom "license derived from the libpng"
 
 An optimizer for PNG (Portable Network Graphics) files. Its main
 purpose is to reduce the size of the PNG IDAT data stream by trying
