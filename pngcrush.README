@@ -118,15 +118,15 @@ Language:
 ------------------------------------
 
 Build instructions:
-  unpack pngcrush-1.7.72+20140315+gitde47033-1-src.tar.bz2
+  unpack pngcrush-1.7.83+20150129+gita490eeb-1-src.tar.bz2
     if you use setup to install this src package, it will be
     unpacked under /usr/src automatically
   cd /usr/src
   ./pngcrush*.sh all
 
 This will create:
-  pngcrush-1.7.72+20140315+gitde47033-1.tar.bz2
-  pngcrush-1.7.72+20140315+gitde47033-1-src.tar.bz2
+  pngcrush-1.7.83+20150129+gita490eeb-1.tar.xz
+  pngcrush-1.7.83+20150129+gita490eeb-1-src.tar.xz
 
 -------------------------------------------
 
@@ -136,6 +136,9 @@ Files included in the binary distribution:
 ------------------
 
 Port Notes:
+
+----- version 1.7.83+20150129+gita490eeb-1 -----
+- New upstream release 2015-02-13 Jari Aalto
 
 ----- version 1.7.72+20140315+gitde47033-1 -----
 - New upstream release 2014-04-10 Jari Aalto
@@ -161,4 +164,4 @@ Port Notes:
 - No manual page. Copien one from Debian
 
 Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
-Copyright (C) 2007-2014 Jari Aalto; Licenced under GPL v2 or later
+Copyright (C) 2007-2015 Jari Aalto; Licenced under GPL v2 or later
