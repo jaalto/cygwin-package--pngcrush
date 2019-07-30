@@ -118,15 +118,15 @@ Language:
 ------------------------------------
 
 Build instructions:
-  unpack pngcrush-1.8.1+20160410+gitbaf49dc-1-src.tar.bz2
+  unpack pngcrush-1.8.12+20171101+git7ae7515-1-src.tar.bz2
     if you use setup to install this src package, it will be
     unpacked under /usr/src automatically
   cd /usr/src
   ./pngcrush*.sh all
 
 This will create:
-  pngcrush-1.8.1+20160410+gitbaf49dc-1.tar.xz
-  pngcrush-1.8.1+20160410+gitbaf49dc-1-src.tar.xz
+  pngcrush-1.8.12+20171101+git7ae7515-1.tar.xz
+  pngcrush-1.8.12+20171101+git7ae7515-1-src.tar.xz
 
 -------------------------------------------
 
@@ -136,6 +136,9 @@ Files included in the binary distribution:
 ------------------
 
 Port Notes:
+
+----- version 1.8.12+20171101+git7ae7515-1 -----
+- New upstream release 2019-07-30 Jari Aalto
 
 ----- version 1.8.1+20160410+gitbaf49dc-1 -----
 - New upstream release 2016-06-08 Jari Aalto
@@ -167,4 +170,4 @@ Port Notes:
 - No manual page. Copien one from Debian
 
 Cygwin port maintained by: Jari Aalto <jari.aalto@cante.net>
-Copyright (C) 2007-2016 Jari Aalto; Licenced under GPL v2 or later
+Copyright (C) 2007-2019 Jari Aalto; Licenced under GPL v2 or later
